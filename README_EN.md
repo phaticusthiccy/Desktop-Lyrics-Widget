@@ -48,7 +48,7 @@
   <br/><br/>
 
   <h3>⚙️ Comprehensive Customization & Settings Panel</h3>
-  <img src="assets/settings.png" alt="Desktop Lyrics Widget Settings Panel" width="85%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <img src="assets/settings.png" alt="Desktop Lyrics Widget Settings Panel" width="25%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
 </div>
 
 ---
