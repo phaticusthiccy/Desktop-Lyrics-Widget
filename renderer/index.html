@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyrics & Mini-Player Widget</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="widget-root" class="widget-container">
+    <!-- Header Control Bar -->
+    <header id="header-bar" class="header-bar">
+      <div class="drag-region" id="drag-region">
+        <span class="app-badge">
+          <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+          </svg>
+          <span class="badge-text">Lyrics</span>
+        </span>
+      </div>
+
+      <div class="header-actions">
+        <!-- Settings Toggle (To the left of Lock Mode) -->
+        <button id="btn-settings" class="icon-btn" title="Ayarlar (Settings)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+
+        <!-- Click-Through Toggle -->
+        <button id="btn-click-through" class="icon-btn" title="Tıklamayı Alta Geçir (Lock Mode)">
+          <svg class="icon lock-open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+          </svg>
+          <svg class="icon lock-closed-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </button>
+
+        <!-- Minimize & Close -->
+        <button id="btn-minimize" class="icon-btn min-btn" title="Simge Durumuna Küçült">−</button>
+        <button id="btn-close" class="icon-btn close-btn" title="Kapat">×</button>
+      </div>
+    </header>
+
+    <!-- Mini Player Info Section -->
+    <section class="player-bar">
+      <div class="track-info">
+        <div class="title-row">
+          <h2 id="track-title" class="track-title">Müzik Bekleniyor...</h2>
+
+          <!-- Play/Pause Quick Control Button -->
+          <button id="btn-playpause" class="title-play-btn" title="Durdur / Oynat (Play/Pause)">
+            <svg id="icon-play" class="media-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="6,4 19,12 6,20"></polygon>
+            </svg>
+            <svg id="icon-pause" class="media-icon" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="5" y="4" width="4" height="16" rx="1"></rect>
+              <rect x="15" y="4" width="4" height="16" rx="1"></rect>
+            </svg>
+          </button>
+
+          <div class="tag-group">
+            <span id="playback-status-tag" class="status-tag playing">▶ ÇALINIYOR</span>
+            <span id="app-tag" class="app-tag">SMTC</span>
+          </div>
+        </div>
+        <p id="track-artist" class="track-artist">Sisteminizde (Spotify/YouTube/Chrome) bir müzik başlatın</p>
+      </div>
+
+      <!-- Time & Progress Scrubber -->
+      <div class="progress-container">
+        <span id="time-current" class="time-label">00:00</span>
+        <div class="progress-bar-bg" id="progress-bar-bg">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <span id="time-total" class="time-label">00:00</span>
+      </div>
+    </section>
+
+    <!-- Karaoke Lyrics View -->
+    <main id="lyrics-wrapper" class="lyrics-wrapper fade-view">
+      <div id="lyrics-container" class="lyrics-container">
+        <div class="lyric-placeholder" data-i18n="placeholderWait">Sistemde çalan müzik algılandığında şarkı sözleri canlı senkronize akacaktır.</div>
+      </div>
+    </main>
+
+    <!-- Settings View (Toggled via Settings Button with Fade Animation) -->
+    <main id="settings-wrapper" class="settings-wrapper fade-view hidden">
+      <div class="settings-container">
+        <div class="settings-header">
+          <h3 data-i18n="settingsTitle">⚙️ Uygulama Ayarları</h3>
+          <button id="btn-close-settings" class="settings-back-btn" title="Geri Dön">✕</button>
+        </div>
+
+        <!-- Language Options -->
+        <div class="settings-section">
+          <h4 data-i18n="sectionLanguage">🌐 Dil (Language)</h4>
+          <div class="setting-row">
+            <label for="select-language" data-i18n="labelLanguage">Arayüz Dili:</label>
+            <select id="select-language" class="custom-select">
+              <option value="tr">🇹🇷 Türkçe</option>
+              <option value="en">🇬🇧 English</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Theme Presets -->
+        <div class="settings-section">
+          <h4 data-i18n="sectionPresets">🎨 Hazır Renk Paletleri</h4>
+          <div class="preset-cards">
+            <button class="preset-card active" data-preset="violet">
+              <span class="preset-dot violet"></span>
+              <span class="preset-name">Violet</span>
+            </button>
+            <button class="preset-card" data-preset="emerald">
+              <span class="preset-dot emerald"></span>
+              <span class="preset-name">Mint</span>
+            </button>
+            <button class="preset-card" data-preset="midnight">
+              <span class="preset-dot midnight"></span>
+              <span class="preset-name">Midnight</span>
+            </button>
+            <button class="preset-card" data-preset="sunset">
+              <span class="preset-dot sunset"></span>
+              <span class="preset-name">Sunset</span>
+            </button>
+            <button class="preset-card" data-preset="crystal">
+              <span class="preset-dot crystal"></span>
+              <span class="preset-name">Crystal</span>
+            </button>
+            <button class="preset-card" data-preset="cyberpunk">
+              <span class="preset-dot cyberpunk"></span>
+              <span class="preset-name">Cyber</span>
+            </button>
+            <button class="preset-card" data-preset="amber">
+              <span class="preset-dot amber"></span>
+              <span class="preset-name">Amber</span>
+            </button>
+            <button class="preset-card" data-preset="dusk">
+              <span class="preset-dot dusk"></span>
+              <span class="preset-name">Dusk</span>
+            </button>
+            <button class="preset-card" data-preset="toxic">
+              <span class="preset-dot toxic"></span>
+              <span class="preset-name">Toxic</span>
+            </button>
+            <button class="preset-card" data-preset="aurora">
+              <span class="preset-dot aurora"></span>
+              <span class="preset-name">Aurora</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Appearance & Glassmorphism -->
+        <div class="settings-section">
+          <h4 data-i18n="sectionAppearance">✨ Görünüm & Saydamlık</h4>
+          
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelOpacity">Saydamlık Düzeyi:</span>
+            <div class="slider-group">
+              <input type="range" id="slider-opacity" min="20" max="100" value="85">
+              <span id="value-opacity" class="slider-value">85%</span>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelBlur">Bulanıklık Efekti:</span>
+            <div class="slider-group">
+              <input type="range" id="slider-blur" min="0" max="40" value="24">
+              <span id="value-blur" class="slider-value">24px</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Window & Behavior Options -->
+        <div class="settings-section">
+          <h4 data-i18n="sectionWindowBehavior">📌 Pencere & Davranış</h4>
+          
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelAlwaysOnTop">Hep Üstte Kal:</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle-always-on-top" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelDimPaused">Duraklatıldığında Soluklaştır:</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle-dim-paused" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelAutoStart">Başlangıçta Çalıştır:</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle-auto-start">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Lyrics Styling & Alignment -->
+        <div class="settings-section">
+          <h4 data-i18n="sectionLyricsStyle">🎤 Şarkı Sözü & Hizalama</h4>
+          
+          <div class="setting-row">
+            <label for="select-lyric-align" data-i18n="labelLyricAlign">Metin Hizalaması:</label>
+            <select id="select-lyric-align" class="custom-select">
+              <option value="center" data-i18n="alignCenter">Ortala (Center)</option>
+              <option value="left" data-i18n="alignLeft">Sola Yasla (Left)</option>
+              <option value="right" data-i18n="alignRight">Sağa Yasla (Right)</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelFontSize">Aktif Söz Boyutu:</span>
+            <div class="slider-group">
+              <input type="range" id="slider-font-size" min="14" max="24" value="18">
+              <span id="value-font-size" class="slider-value">18px</span>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelTimeOffset">Zaman İlerleme (Offset):</span>
+            <div class="slider-group">
+              <input type="range" id="slider-time-offset" min="-30" max="30" value="0" step="1">
+              <span id="value-time-offset" class="slider-value">0.0s</span>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <span class="setting-label" data-i18n="labelGlow">Neon Vurgu (Glow):</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle-glow" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Reset Defaults -->
+        <div class="settings-actions">
+          <button id="btn-reset-settings" class="secondary-btn-full" data-i18n="btnReset">Varsayılanlara Sıfırla</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

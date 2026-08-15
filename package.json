@@ -1,0 +1,50 @@
+{
+  "name": "desktop-lyrics-widget",
+  "version": "1.0.0",
+  "description": "Windows Masaüstü Canlı Şarkı Sözü ve Mini Medya Oynatıcı Widget'ı",
+  "main": "main.js",
+  "author": "Phaticusthiccy",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test-lrc.js",
+    "build": "electron-builder --win"
+  },
+  "keywords": [
+    "electron",
+    "lyrics",
+    "spotify",
+    "youtube",
+    "widget"
+  ],
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.desktop.lyricswidget",
+    "productName": "Desktop Lyrics Widget",
+    "copyright": "Copyright © 2026 Phaticusthiccy",
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "publisherName": "Phaticusthiccy"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Desktop Lyrics Widget"
+    },
+    "files": [
+      "**/*"
+    ],
+    "asarUnpack": [
+      "scripts/**/*"
+    ]
+  }
+}
