@@ -43,7 +43,8 @@
 
 <div align="center">
   <h3>⚡ Canlı Senkronizasyon ve Medya Kontrol Demosu</h3>
-  <video src="assets/action.mp4" controls width="90%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" autoplay loop muted></video>
+  
+  ![SS](https://github.com/user-attachments/assets/f9684f51-6153-4386-ac5b-65cb97953e21)
 
   <br/><br/>
 
