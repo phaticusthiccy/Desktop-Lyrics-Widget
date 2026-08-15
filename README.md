@@ -9,6 +9,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/phaticusthiccy/Desktop-Lyrics-Widget/releases/">
+    <img src="https://img.shields.io/badge/📥_İndir_(Download)-Windows_.EXE-22c55e?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows EXE" />
+  </a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Electron-30.0-47848F?style=for-the-badge&logo=electron&logoColor=white" alt="Electron" />
   <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/LRCLIB-API-8B5CF6?style=for-the-badge" alt="LRCLIB" />
