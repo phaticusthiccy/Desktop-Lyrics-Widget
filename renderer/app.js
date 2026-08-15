@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const DEFAULT_SETTINGS = {
-    language: 'tr',
+    language: 'en',
     preset: 'violet',
     opacity: 85,
     blur: 24,
